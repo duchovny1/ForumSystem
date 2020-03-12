@@ -1,1 +1,24 @@
 ﻿@model ForumSystem.Web.ViewModels.Categories.CategoryViewModel
+ 
+
+
+<h1 class="display-3">@Model.Title</h1>
+<div class="alert-info">
+    @Model.Description
+</div>
+
+@foreach (var item in Model.Posts)
+{
+    <div class="media-body">
+        <h4 class="media-heading">@item.Title</h4>
+        <p>
+            @item.ShortContent
+        </p>
+            <ul class="list-inline list-unstyled text-right">
+                <li class="list-inline-item"><i class="fas fa-user-circle"></i>@item.UserUserName </li>
+                <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>@item.CreatedOn</li>
+                <li class="list-inline-item"><i class="fas fa-comment-dots"></i> @item.CommentsCount comments</li>
+            </ul>
+            By @item.UserUserName
+    </div>
+}

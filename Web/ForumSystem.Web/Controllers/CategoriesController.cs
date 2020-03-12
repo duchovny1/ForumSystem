@@ -18,7 +18,7 @@
         {
             var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
 
-            return this.View();
+            return this.View(viewModel);
         }
     }
 }
