@@ -47,10 +47,11 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add(new ValidateAntiForgeryTokenAttribute());
-            });
+            services.AddControllersWithViews(); //options =>
+            //{
+            //    options.Filters.Add(new ValidateAntiForgeryTokenAttribute());
+            //});
+
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);

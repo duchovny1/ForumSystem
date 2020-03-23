@@ -1,30 +1,40 @@
 ﻿namespace ForumSystem.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using ForumSystem.Data.Models;
     using ForumSystem.Services.Data;
     using ForumSystem.Web.ViewModels.Posts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ICategoriesService categoriesService;
 
         public PostsController(
             IPostsService postsService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ICategoriesService categoriesService)
         {
             this.postsService = postsService;
             this.userManager = userManager;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult ById(int id)
         {
-            //TODO
-            return this.View();
+            var viewModel = this.postsService.GetById<PostViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
         }
 
         public IActionResult Index()
@@ -35,7 +45,10 @@
         [Authorize]
         public IActionResult Create()
         {
-            return this.View();
+            var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
+            var viewModel = new PostCreateInputModel();
+            viewModel.Categories = categories;
+            return this.View(viewModel);
         }
 
         [HttpPost]

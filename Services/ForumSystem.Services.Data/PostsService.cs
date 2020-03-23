@@ -1,5 +1,7 @@
 ﻿using ForumSystem.Data.Common.Repositories;
 using ForumSystem.Data.Models;
+using ForumSystem.Services.Mapping;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ForumSystem.Services.Data
@@ -26,6 +28,13 @@ namespace ForumSystem.Services.Data
             await this.postsRepository.AddAsync(post);
             await this.postsRepository.SaveChangesAsync();
             return post.Id;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var post = this.postsRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return post;
         }
     }
 }
