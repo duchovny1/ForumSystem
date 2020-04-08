@@ -7,7 +7,7 @@
     using ForumSystem.Data.Models;
     using ForumSystem.Services.Mapping;
 
-    public class CategoriesService : ICategoriesService
+    public class CategoriesService : ICategoriesS   ervice
     {
         private readonly IDeletableEntityRepository<Category> categoriesRepository;
 
@@ -35,6 +35,11 @@
                 .To<T>().FirstOrDefault();
 
             return result;
+        }
+
+        public T GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

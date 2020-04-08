@@ -23,7 +23,7 @@
             configuration.CreateMap<Category, IndexCategoryViewModel>()
                 .ForMember(
                    x => x.Url,
-                   c => c.MapFrom(e => "/f" + e.Id.ToString() + "/" + e.Name.Replace(' ', '-')));
+                   c => c.MapFrom(e => "/f/" + e.Id.ToString() + "/" + e.Name.Replace(' ', '-')));
         }
     }
 }

@@ -19,9 +19,9 @@
 <h1>@this.ViewData["Title"]</h1>
 
 <form method="post" asp-action="Create">
-    <div>
+    <div class="form-group">
         <label asp-for="Title"></label>
-        <input asp-for="Title" />
+        <input class="form-group" asp-for="Title" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div>
@@ -30,7 +30,7 @@
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
     <div>
-        <label asp-for="CategoryId"></label>
+        <label asp-for="CategoryId">Category</label>
         <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
